@@ -6,6 +6,10 @@ import './App.css'
 
 import GameCard from './components/game-card'
 
+
+
+
+
   const games = [
     {
       title: 'Red Dead Redemption 2',
@@ -21,12 +25,25 @@ import GameCard from './components/game-card'
 
 function App() {
 
+  const [search, setSearch] = useState('')
+
+  const filteredGames = games.filter((game) =>
+    game.title.toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
     <div className="App">
       <h1>Game Library</h1>
-    
+      
+        <input 
+          className="search-bar"
+          type="text" 
+          placeholder="Search games..." 
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}/>
+
       <div className="game-grid">
-        {games.map((game) => (
+        {filteredGames.map((game) => (
           <GameCard key={game.id} game={game} />
           ))}
       </div>

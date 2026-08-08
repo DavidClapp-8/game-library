@@ -18,3 +18,13 @@
   object-fit: cover;
   display: block;
 }
+
+.search-bar {
+  margin: 20px;
+  padding: 12px 16px;
+  width: calc(100% - 40px);
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
