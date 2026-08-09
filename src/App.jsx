@@ -5,6 +5,7 @@ import Terraria from './assets/Terraria.jpg'
 import './App.css'
 
 import GameCard from './components/game-card'
+import SearchBar from './components/search-bar'
 
 
 
@@ -12,11 +13,13 @@ import GameCard from './components/game-card'
 
   const games = [
     {
+      id: 1,
       title: 'Red Dead Redemption 2',
       description: 'This is a sample game description.',
       image: RDR2
     },
     { 
+      id: 2, 
       title: 'Terraria',
       description: 'This is another game description.',
       image: Terraria
@@ -24,23 +27,16 @@ import GameCard from './components/game-card'
   ]
 
 function App() {
-
   const [search, setSearch] = useState('')
-
   const filteredGames = games.filter((game) =>
     game.title.toLowerCase().includes(search.toLowerCase())
   )
 
   return (
-    <div className="App">
+    <div>
       <h1>Game Library</h1>
-      
-        <input 
-          className="search-bar"
-          type="text" 
-          placeholder="Search games..." 
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}/>
+      <SearchBar search={search} setSearch={setSearch} />
+
 
       <div className="game-grid">
         {filteredGames.map((game) => (

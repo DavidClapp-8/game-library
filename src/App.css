@@ -21,10 +21,15 @@
 
 .search-bar {
   margin: 20px;
-  padding: 12px 16px;
   width: calc(100% - 40px);
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 15px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
   box-sizing: border-box;
+  outline: none;
 }
