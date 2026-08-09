@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function GameCard({ game }) {
+function GameCard({ game, onClick }) {
   const [isFavorite, setIsFavorite] = useState(false)
 
   const toggleFavorite = () => {
@@ -8,7 +8,7 @@ function GameCard({ game }) {
   }
 
   return (
-    <div className="game-card">
+    <div className="game-card" onClick={onClick}>
       <img src={game.image} alt={game.title} />
       <h2>{game.title}</h2>
       <p>{game.description}</p>
