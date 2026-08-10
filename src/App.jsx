@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+
+import RDR2Banner from './assets/RDR2_banner.jpg'
 import RDR2 from './assets/RDR2.jpg'
 import Terraria from './assets/Terraria.jpg'
 import './App.css'
@@ -19,7 +20,8 @@ import GameDetails from './components/game-details'
       genre: 'Action-Adventure',
       release_date: 'October 26, 2018',
       platform: 'PlayStation 4, Xbox One, PC',
-      image: RDR2
+      image: RDR2,
+      banner: RDR2Banner
     },
     { 
       id: 2, 
@@ -28,7 +30,9 @@ import GameDetails from './components/game-details'
       genre: 'Sandbox',
       release_date: 'May 16, 2011',
       platform: 'PC',
-      image: Terraria
+      image: Terraria,
+      banner: Terraria
+      
     },
     {
       id: 3,
@@ -37,7 +41,8 @@ import GameDetails from './components/game-details'
       genre: 'Sandbox',
       release_date: 'February 20, 2008',
       platform: 'PC',
-      image: RDR2
+      image: RDR2,
+      banner: RDR2
     },
     { 
       id: 4, 
@@ -46,7 +51,8 @@ import GameDetails from './components/game-details'
       genre: 'Simulation',
       release_date: 'September 15, 2014',
       platform: 'PC',
-      image: Terraria
+      image: Terraria,
+      banner: Terraria
     },
     {
       id: 5,
@@ -55,7 +61,8 @@ import GameDetails from './components/game-details'
       genre: 'Sandbox',
       release_date: 'November 18, 2011',
       platform: 'PC',
-      image: RDR2
+      image: RDR2,
+      banner: RDR2
     },
     { 
       id: 6, 
@@ -64,7 +71,8 @@ import GameDetails from './components/game-details'
       genre: 'Action-Adventure',
       release_date: 'March 4, 2017',
       platform: 'Nintendo Switch',
-      image: Terraria
+      image: Terraria,
+      banner: Terraria
     },
     { 
       id: 7, 
@@ -73,7 +81,8 @@ import GameDetails from './components/game-details'
       genre: 'Action',
       release_date: 'January 1, 2020',
       platform: 'PC',
-      image: Terraria
+      image: Terraria,
+      banner: Terraria
     },
 
   ]
@@ -111,9 +120,6 @@ const sortedGames = [...filteredGames].sort((a, b) => {
 
   return (
     <div>
-      <h1>Game Library</h1>
-
-
     {/* Render GameDetails if a game is selected, otherwise render the game list with filters */}
     {selectedGame ? (
       <GameDetails
@@ -122,6 +128,7 @@ const sortedGames = [...filteredGames].sort((a, b) => {
       />
     ) : (
       <>
+        <h1>Game Library</h1>
         <SearchBar search={search} setSearch={setSearch} />
         <GenreFilter genre={genre} setGenre={setGenre} />
         <SortFilter sort={sort} setSort={setSort} />

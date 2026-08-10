@@ -1,10 +1,11 @@
+import BackButton from './back-button'
 function GameDetails({ game, onBack }) {
   return (
     <div className="game-details">
-      <button onClick={onBack}>Back to Games</button>
+      <BackButton onBack={onBack} />
       <h1>{game.title}</h1>
 
-      <img src={game.image} alt={game.title} />
+      <img src={game.banner} alt={game.title} />
 
       <p>Genre: {game.genre}</p>
       <p>Platform: {game.platform}</p>
