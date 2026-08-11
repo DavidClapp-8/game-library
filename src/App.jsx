@@ -10,7 +10,7 @@ import SearchBar from './components/search-bar'
 import GenreFilter from './components/genre-filter'
 import SortFilter from './components/sort-filter'
 import GameDetails from './components/game-details'
-
+import Library from './components/library'
 
   const games = [
     {
@@ -93,9 +93,28 @@ function App() {
   const [genre, setGenre] = useState('All')
   const [sort, setSort] = useState('default')
   const [selectedGame, setSelectedGame] = useState(null)
+  const [page, setPage] = useState('catalogue')
 
 
-const filteredGames = games.filter((game) => {
+  
+  const [library, setLibrary] = useState([])
+
+function addToLibrary(game) {
+  if (library.some((libraryGame) => libraryGame.id === game.id)) {
+    return
+  }
+
+  setLibrary([...library, game])
+}
+
+function removeFromLibrary(game) {
+  setLibrary(
+    library.filter((libraryGame) => libraryGame.id !== game.id)
+  )
+}
+
+
+  const filteredGames = games.filter((game) => {
     const matchesSearch = game.title
       .toLowerCase()
       .includes(search.toLowerCase())
@@ -119,28 +138,48 @@ const sortedGames = [...filteredGames].sort((a, b) => {
 })
 
   return (
+    
     <div>
+      <nav>
+          <button onClick={() => setPage('catalogue')}>
+            All Games
+          </button>
+
+          <button onClick={() => setPage('library')}>
+            My Library
+          </button>
+        </nav>
     {/* Render GameDetails if a game is selected, otherwise render the game list with filters */}
     {selectedGame ? (
       <GameDetails
         game={selectedGame}
         onBack={() => setSelectedGame(null)}
+        onAdd={() => addToLibrary(selectedGame)}
+        onRemove={() => removeFromLibrary(selectedGame)}
+        isInLibrary={library.some((libraryGame) => libraryGame.id === selectedGame.id)}
+        
       />
     ) : (
       <>
-        <h1>Game Library</h1>
+      {page === 'library' ? (
+        <Library library={library} />
+        ) : (
+        <>
+        <h1>Games Catalogue</h1>
         <SearchBar search={search} setSearch={setSearch} />
         <GenreFilter genre={genre} setGenre={setGenre} />
         <SortFilter sort={sort} setSort={setSort} />
       {/* Render the game grid with filtered and sorted games */}
       <div className="game-grid">
         {sortedGames.map((game) => (
-          <GameCard key={game.id} 
+          <GameCard key={game.id}
             game={game} 
             onClick={() => setSelectedGame(game)}
           />
           ))}
       </div>
+      </>
+      )}
       </>
     )}
     </div>

@@ -19,6 +19,16 @@
   display: block;
 }
 
+.game-details button{
+  margin: 20px;
+  width: calc(15% - 20px);
+  height: calc(15% - 1px);
+  position: absolute;
+  top: 80%;
+  left: calc(50% - (15% - 20px) / 2);
+
+}
+
 .search-bar {
   margin: 20px;
   width: calc(100% - 40px);

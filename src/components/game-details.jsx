@@ -1,5 +1,7 @@
 import BackButton from './back-button'
-function GameDetails({ game, onBack }) {
+import AddToLibrary from './add-to-library'
+
+function GameDetails({ game, onBack, onAdd, onRemove, isInLibrary }) {
   return (
     <div className="game-details">
       <BackButton onBack={onBack} />
@@ -10,9 +12,15 @@ function GameDetails({ game, onBack }) {
       <p>Genre: {game.genre}</p>
       <p>Platform: {game.platform}</p>
       <p>Released: {game.releaseYear}</p>
-      <p>Rating: {game.rating}/10</p>
+
 
       <p>{game.description}</p>
+
+      {isInLibrary ? (
+        <button onClick={onRemove}>Remove from Library</button>
+      ) : (
+        <AddToLibrary onAdd={onAdd} />
+      )}
     </div>
   )
 }
