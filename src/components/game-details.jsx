@@ -11,7 +11,7 @@ function GameDetails({ game, onBack, onAdd, onRemove, isInLibrary }) {
 
       <p>Genre: {game.genre}</p>
       <p>Platform: {game.platform}</p>
-      <p>Released: {game.releaseYear}</p>
+      <p>Released: {game.release_date}</p>
 
 
       <p>{game.description}</p>
