@@ -21,7 +21,8 @@ import Library from './components/library'
       release_date: 'October 26, 2018',
       platform: 'PlayStation 4, Xbox One, PC',
       image: RDR2,
-      banner: RDR2Banner
+      banner: RDR2Banner,
+      status: ''
     },
     { 
       id: 2, 
@@ -31,7 +32,8 @@ import Library from './components/library'
       release_date: 'May 16, 2011',
       platform: 'PC',
       image: Terraria,
-      banner: Terraria
+      banner: Terraria,
+      status: ''
       
     },
     {
@@ -42,7 +44,8 @@ import Library from './components/library'
       release_date: 'February 20, 2008',
       platform: 'PC',
       image: RDR2,
-      banner: RDR2
+      banner: RDR2,
+      status: ''
     },
     { 
       id: 4, 
@@ -52,7 +55,8 @@ import Library from './components/library'
       release_date: 'September 15, 2014',
       platform: 'PC',
       image: Terraria,
-      banner: Terraria
+      banner: Terraria,
+      status: ''
     },
     {
       id: 5,
@@ -62,7 +66,8 @@ import Library from './components/library'
       release_date: 'November 18, 2011',
       platform: 'PC',
       image: RDR2,
-      banner: RDR2
+      banner: RDR2,
+      status: ''
     },
     { 
       id: 6, 
@@ -72,7 +77,8 @@ import Library from './components/library'
       release_date: 'March 4, 2017',
       platform: 'Nintendo Switch',
       image: Terraria,
-      banner: Terraria
+      banner: Terraria,
+      status: ''
     },
     { 
       id: 7, 
@@ -82,7 +88,8 @@ import Library from './components/library'
       release_date: 'January 1, 2020',
       platform: 'PC',
       image: Terraria,
-      banner: Terraria
+      banner: Terraria,
+      status: ''
     },
 
   ]
@@ -100,16 +107,36 @@ function App() {
   const [library, setLibrary] = useState([])
 
 function addToLibrary(game) {
-  if (library.some((libraryGame) => libraryGame.id === game.id)) {
+  if (library.some((libraryGame) => libraryGame.game.id === game.id)) {
     return
   }
 
-  setLibrary([...library, game])
+  const libraryGame = {
+    game: game,
+    status: 'In Library'
+  }
+
+  setLibrary([...library, libraryGame])
 }
 
 function removeFromLibrary(game) {
   setLibrary(
-    library.filter((libraryGame) => libraryGame.id !== game.id)
+    library.filter((libraryGame) => libraryGame.game.id !== game.id)
+  )
+}
+
+function changeStatus(gameId, newStatus) {
+  setLibrary(
+    library.map((libraryGame) => {
+      if (libraryGame.game.id === gameId) {
+        return {
+          ...libraryGame,
+          status: newStatus
+        }
+      }
+
+      return libraryGame
+    })
   )
 }
 
@@ -156,13 +183,18 @@ const sortedGames = [...filteredGames].sort((a, b) => {
         onBack={() => setSelectedGame(null)}
         onAdd={() => addToLibrary(selectedGame)}
         onRemove={() => removeFromLibrary(selectedGame)}
-        isInLibrary={library.some((libraryGame) => libraryGame.id === selectedGame.id)}
+        isInLibrary={library.some((libraryGame) => libraryGame.game.id === selectedGame.id)}
         
       />
     ) : (
       <>
       {page === 'library' ? (
-        <Library library={library} />
+        <Library 
+        library={library}
+        onChangeStatus={changeStatus}
+        
+        />
+        
         ) : (
         <>
         <h1>Games Catalogue</h1>
